@@ -1,8 +1,23 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
+
+import BlackRook from "../assets/images/black/rook.svg"
+import BlackKnight from "../assets/images/black/knight.svg"
+import BlackBishop from "../assets/images/black/bishop.svg"
+import BlackQueen from "../assets/images/black/queen.svg"
+import BlackKing from "../assets/images/black/king.svg"
+import BlackPawn from "../assets/images/black/pawn.svg"
+import WhiteRook from "../assets/images/white/rook.svg"
+import WhiteKnight from "../assets/images/white/knight.svg"
+import WhiteBishop from "../assets/images/white/bishop.svg"
+import WhiteQueen from "../assets/images/white/queen.svg"
+import WhiteKing from "../assets/images/white/king.svg"
+import WhitePawn from "../assets/images/white/pawn.svg"
+
+
 
 interface Piece {
     piece: string
-    img: string
+    img: string | undefined
     color: "white" | "black"
     hasMoved: boolean
     getPossibleMoves: (board: Piece[][]) => { row: number, col: number }[]
@@ -15,14 +30,21 @@ function createPiece(
 ): Piece {
     return {
         piece,
-        img: `/images/${color}/${piece}.svg`,
+        img: {
+            rook: color === "white" ? WhiteRook : BlackRook,
+            knight: color === "white" ? WhiteKnight : BlackKnight,
+            bishop: color === "white" ? WhiteBishop : BlackBishop,
+            queen: color === "white" ? WhiteQueen : BlackQueen,
+            king: color === "white" ? WhiteKing : BlackKing,
+            pawn: color === "white" ? WhitePawn : BlackPawn,
+        }[piece],
         color,
         hasMoved: false,
         getPossibleMoves,
     }
 }
 
-const placeholderMoves = (board: Piece[][]): { row: number, col: number }[] => []
+const placeholderMoves = (_board: Piece[][]): { row: number, col: number }[] => []
 
 enum PieceType {
     Rook = "rook",
@@ -68,6 +90,7 @@ const initialBoard: (Piece | null)[][] = [
 
 const Chessboard: React.FC = () => {
     const [board, setBoard] = useState<(Piece | null)[][]>(initialBoard)
+    const moveSound = useRef(new Audio('./drop.mp3'))
     const [draggedPiece, setDraggedPiece] = useState<{
         piece: Piece
         row: number
@@ -85,6 +108,7 @@ const Chessboard: React.FC = () => {
 
     const handleDrop = (row: number, col: number) => {
         if (!draggedPiece) return
+        moveSound.current.play()
         const newBoard = board.map(row => [...row])
         newBoard[draggedPiece.row][draggedPiece.col] = null
         newBoard[row][col] = draggedPiece.piece

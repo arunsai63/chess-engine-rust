@@ -1,54 +1,56 @@
-# React + TypeScript + Vite
+# ♟️ Chess Engine in Rust + WebAssembly + React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Demo: [arunsai63.github.io/chess-engine-rust](https://arunsai63.github.io/chess-engine-rust)  
+GitHub Repo: [github.com/arunsai63/chess-engine-rust](https://github.com/arunsai63/chess-engine-rust)
 
-Currently, two official plugins are available:
+## 🚀 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a full-stack chess game built with:
 
-## Expanding the ESLint configuration
+- 🦀 **Rust** — for the core chess engine logic
+- 🌐 **WebAssembly (WASM)** — to run high-performance Rust code in the browser
+- ⚛️ **React + Vite** — for a fast, modern UI
+- 🎨 **TailwindCSS** — for rapid, utility-first styling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The goal was to create a performant, interactive chess game where the heavy-lifting game logic runs via compiled WebAssembly, bringing native-like speed to the browser.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🧠 Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Full chess rules engine implemented in **Rust**
+- Compile-time optimized with **`wasm-pack`**
+- Seamless integration with **React frontend** via WebAssembly bindings
+- Interactive chessboard UI built with **React and TailwindCSS**
+- **Stateless rendering** for a responsive and minimalistic UX
+- Lightweight and extremely fast — thanks to **Rust + WASM**
+- Deployed on **GitHub Pages** using Vite's static export
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Tech Stack
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+| Layer        | Technology              |
+|--------------|--------------------------|
+| Game Engine  | Rust                    |
+| WASM Binding | `wasm-bindgen`, `wasm-pack` |
+| Frontend     | React (Vite)            |
+| Styling      | TailwindCSS             |
+| Deployment   | GitHub Pages            |
+
+## 🛠️ Rust Game Engine
+
+The chess engine is written entirely in Rust, designed with:
+
+- **Bitboard representation** for performance
+- **Move generation** (legal moves, captures, castling, etc.)
+- **Check/checkmate logic**
+- **Board evaluation** (optional extension)
+
+It compiles to WebAssembly and exposes functions to JavaScript using `wasm-bindgen`.
+
+### 🧩 Example Rust ↔ JS Binding
+
+```rust
+#[wasm_bindgen]
+pub fn generate_legal_moves(fen: &str) -> JsValue {
+    let board = Board::from_fen(fen).unwrap();
+    let moves = board.generate_moves();
+    JsValue::from_serde(&moves).unwrap()
+}
