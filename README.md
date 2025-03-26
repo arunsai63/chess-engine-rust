@@ -54,3 +54,82 @@ pub fn generate_legal_moves(fen: &str) -> JsValue {
     let moves = board.generate_moves();
     JsValue::from_serde(&moves).unwrap()
 }
+
+🖥️ React Frontend
+
+The UI is built using React + TailwindCSS and communicates with the Rust engine via the WASM bindings.
+	•	React hooks to manage state and game flow
+	•	WASM functions are called via async JS
+	•	Chessboard rendered with a simple grid system
+	•	No external chess libraries — all logic is native
+
+📂 Project Structure
+
+chess-engine-rust/
+├── src/
+│   ├── engine/            # Rust chess engine (compiled to WASM)
+│   └── web/               # React frontend with Vite
+├── pkg/                   # WASM output package
+├── public/
+├── index.html
+└── README.md
+
+🧪 Running Locally
+
+Prerequisites
+	•	Rust
+	•	wasm-pack
+	•	Node.js + npm
+	•	Vite
+
+Steps
+
+# Build the Rust engine to WASM
+cd src/engine
+wasm-pack build --target web
+
+# Move to frontend
+cd ../web
+npm install
+npm run dev
+
+🌍 Deployment
+
+Deployed using GitHub Pages via Vite’s static export.
+
+npm run build
+# Push the build directory to GitHub Pages
+
+📌 Why This Project?
+
+This project demonstrates:
+	•	Systems-level programming with Rust
+	•	Real-world WASM integration into a frontend stack
+	•	Building optimized web applications without bloated dependencies
+	•	Clean UI/UX using Tailwind and React
+	•	Deploying full Rust-to-React pipelines for modern web apps
+
+💼 Ideal For
+
+If you’re hiring for roles involving:
+	•	Rust / WASM / Systems programming
+	•	Frontend/backend web integration
+	•	High-performance browser apps
+	•	Cross-language architecture (Rust ↔ JS)
+
+This project showcases end-to-end capability in building modern, high-performance web apps with low-level languages.
+
+⸻
+
+📫 Let’s Connect!
+
+If you’re interested in collaborating, hiring, or just chatting about systems programming, feel free to reach out via GitHub.
+
+---
+
+Let me know if you'd like a one-liner for your resume or LinkedIn too!
+
+
+# Todo:
+- en passant
+- pawn promotion
