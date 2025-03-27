@@ -17,7 +17,7 @@ const RightSidebar: React.FC = () => {
         <div className="w-80 bg-[#212121] text-[#d3d3d3] p-6 flex flex-col h-full">
             {/* Opening Section */}
             <div className="mb-6">
-                <h2 className="text-xl font-semibold text-[#779952] mb-4">Opening</h2>
+                <h2 className="text-xl font-semibold text-[#779952] mb-4">Moves</h2>
                 <div
                     ref={movesContainerRef}
                     className="max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-[#779952] scrollbar-track-[#2c2c2c] space-y-2"
@@ -38,6 +38,11 @@ const RightSidebar: React.FC = () => {
             {/* Mistakes, Blunders, Misses Section */}
             <div className="mb-6 bg-[#2c2c2c] p-4 rounded">
                 <div className="flex flex-wrap gap-4 text-sm">
+                    <span className="flex items-center">
+                        <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                        <span>Great:</span>
+                        <span className="ml-1 text-green-400 font-semibold">0</span>
+                    </span>
                     <span className="flex items-center">
                         <span className="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
                         <span>Mistakes:</span>
@@ -71,7 +76,7 @@ const RightSidebar: React.FC = () => {
                                     </div>
                                 ))
                             ) : (
-                                <span className="text-[#b0b0b0] text-sm">None</span>
+                                <span className="text-[#b0b0b0] text-sm"></span>
                             )}
                         </div>
                     </div>
@@ -87,7 +92,7 @@ const RightSidebar: React.FC = () => {
                                     </div>
                                 ))
                             ) : (
-                                <span className="text-[#b0b0b0] text-sm">None</span>
+                                <span className="text-[#b0b0b0] text-sm"></span>
                             )}
                         </div>
                     </div>

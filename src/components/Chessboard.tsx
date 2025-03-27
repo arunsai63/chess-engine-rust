@@ -1,8 +1,9 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { ColorType, Position, MoveRecord, Piece, PieceType } from "../types/pieces"
 import Confetti from "./Confetti"
 import { initialBoard } from "../common/pieceUtils"
 import { useGlobal } from "../Context"
+import init, { greet } from 'chess-engine'
 
 
 
@@ -20,6 +21,12 @@ const Chessboard: React.FC = () => {
     const [lastMove, setLastMove] = useState<MoveRecord | null>(null)
     const [winner, setWinner] = useState<ColorType | null>(null)
     const [showConfetti, setShowConfetti] = useState<boolean>(false)
+
+    useEffect(() => {
+        init().then(() => {
+            console.log(greet("rust wasm"))
+        })
+    }, [])
 
     const handleDragStart = (row: number, col: number, piece: Piece) => {
         if (piece.color !== nextMove) return
