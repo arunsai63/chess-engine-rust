@@ -1,7 +1,8 @@
 # ♟️ Chess Engine in Rust + WebAssembly + React
 
 Live Demo: [arunsai63.github.io/chess-engine-rust](https://arunsai63.github.io/chess-engine-rust)  
-GitHub Repo: [github.com/arunsai63/chess-engine-rust](https://github.com/arunsai63/chess-engine-rust)
+
+![image](https://github.com/user-attachments/assets/37197b96-b6d9-4f5b-b375-3683b48ba2e0)
 
 ## 🚀 Overview
 
